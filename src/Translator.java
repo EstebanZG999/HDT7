@@ -1,23 +1,5 @@
 import java.util.Scanner;
 
-class TreeNode {
-    String word;
-    String english;
-    String spanish;
-    String french;
-    TreeNode left;
-    TreeNode right;
-
-    public TreeNode(String word, String english, String spanish, String french) {
-        this.word = word;
-        this.english = english;
-        this.spanish = spanish;
-        this.french = french;
-        this.left = null;
-        this.right = null;
-    }
-}
-
 public class Translator {
     static TreeNode root = null;
 
@@ -27,27 +9,27 @@ public class Translator {
         insert("homework", "homework", "tarea", "devoirs");
         insert("woman", "woman", "mujer", "femme");
         insert("town", "town", "pueblo", "ville");
-        insert("yes", "yes", "si", "Oui");
+        insert("yes", "yes", "si", "oui");
         insert("casa", "house", "casa", "loger");
         insert("perro", "dog", "perro", "chien");
         insert("tarea", "homework", "tarea", "devoirs");
         insert("mujer", "woman", "mujer", "femme");
         insert("pueblo", "town", "pueblo", "ville");
-        insert("si", "yes", "si", "Oui");
+        insert("si", "yes", "si", "oui");
         insert("loger", "house", "casa", "loger");
         insert("chien", "dog", "perro", "chien");
         insert("devoirs", "homework", "tarea", "devoirs");
         insert("femme", "woman", "mujer", "femme");
         insert("ville", "town", "pueblo", "ville");
-        insert("Oui", "yes", "si", "Oui");
+        insert("Oui", "yes", "si", "oui");
 
 
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter a word to translate: ");
-        String word = scanner.nextLine();
+        String word = scanner.nextLine().toLowerCase();
 
         System.out.print("Enter the language to translate to (english, spanish, french): ");
-        String lang = scanner.nextLine();
+        String lang = scanner.nextLine().toLowerCase();
 
         TreeNode result = search(root, word);
         if (result == null) {

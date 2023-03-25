@@ -1,12 +1,12 @@
-public class TreeNode {
-    String word;
+public class Node {
+    static String word;
     String english;
     String spanish;
     String french;
-    TreeNode left;
-    TreeNode right;
+    static Node left;
+    static Node right;
 
-    public TreeNode(String word, String english, String spanish, String french) {
+    public Node(String word, String english, String spanish, String french) {
         this.word = word;
         this.english = english;
         this.spanish = spanish;

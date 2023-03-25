@@ -1,10 +1,10 @@
 public class Node {
-    static String word;
+    String word;
     String english;
     String spanish;
     String french;
-    static Node left;
-    static Node right;
+    Node left;
+    Node right;
 
     public Node(String word, String english, String spanish, String french) {
         this.word = word;
@@ -15,3 +15,4 @@ public class Node {
         this.right = null;
     }
 }
+

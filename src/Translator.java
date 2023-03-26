@@ -1,13 +1,12 @@
-import java.util.*;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Scanner;
 
 public class Translator {
     static Node root = null;
 
     public static void main(String[] args) {
-
-        readTxtFile();
-
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Enter the language to translate from (english, spanish, french): ");
@@ -18,6 +17,12 @@ public class Translator {
 
         System.out.println("Enter a sentence to translate: ");
         String sentence = scanner.nextLine().toLowerCase();
+
+        System.out.println(translate(fromLang, toLang, sentence));
+    }
+
+    public static String translate(String fromLang, String toLang, String sentence) {
+        readTxtFile();
 
         String[] words = sentence.split("\\s+");
         StringBuilder translationBuilder = new StringBuilder();
@@ -35,12 +40,12 @@ public class Translator {
                     translationBuilder.append(translations[3]).append(" ");
                 } else {
                     System.out.println("Invalid language");
-                    return;
+                    return null;
                 }
             }
         }
 
-        System.out.println("Translation: " + translationBuilder.toString().trim());
+        return "\nTranslation: " + translationBuilder.toString().trim();
     }
 
     public static void readTxtFile() {
@@ -70,7 +75,6 @@ public class Translator {
         System.out.print("\n(" + node.french + ", " + node.english + ", " + node.spanish + ") \n");
         order(node.right);
     }
-
 
     public static void insert(String word, String english, String spanish, String french) {
         root = insertNode(root, word, english, spanish, french);

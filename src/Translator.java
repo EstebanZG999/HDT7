@@ -9,26 +9,38 @@ public class Translator {
         readTxtFile();
 
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter a word to translate: ");
-        String word = scanner.nextLine().toLowerCase();
+
+        System.out.println("Enter the language to translate from (english, spanish, french): ");
+        String fromLang = scanner.nextLine().toLowerCase();
 
         System.out.println("Enter the language to translate to (english, spanish, french): ");
-        String lang = scanner.nextLine().toLowerCase();
+        String toLang = scanner.nextLine().toLowerCase();
 
-        String[] translations = WordReader.search(root, word, lang);
-        if (translations == null) {
-            System.out.println("Word not found");
-        } else {
-            if (lang.equals("english")) {
-                System.out.println("English: " + translations[1]);
-            } else if (lang.equals("spanish")) {
-                System.out.println("Spanish: " + translations[2]);
-            } else if (lang.equals("french")) {
-                System.out.println("French: " + translations[3]);
+        System.out.println("Enter a sentence to translate: ");
+        String sentence = scanner.nextLine().toLowerCase();
+
+        String[] words = sentence.split("\\s+");
+        StringBuilder translationBuilder = new StringBuilder();
+
+        for (String word : words) {
+            String[] translations = WordReader.search(root, word, fromLang);
+            if (translations == null) {
+                translationBuilder.append(word).append(" ");
             } else {
-                System.out.println("Invalid language");
+                if (toLang.equals("english")) {
+                    translationBuilder.append(translations[1]).append(" ");
+                } else if (toLang.equals("spanish")) {
+                    translationBuilder.append(translations[2]).append(" ");
+                } else if (toLang.equals("french")) {
+                    translationBuilder.append(translations[3]).append(" ");
+                } else {
+                    System.out.println("Invalid language");
+                    return;
+                }
             }
         }
+
+        System.out.println("Translation: " + translationBuilder.toString().trim());
     }
 
     public static void readTxtFile() {
@@ -76,13 +88,7 @@ public class Translator {
             node.left = insertNode(node.left, word, english, spanish, french);
         } else if (cmp > 0) {
             node.right = insertNode(node.right, word, english, spanish, french);
-        } else {
-            // word already exists, update translations
-            node.english = english;
-            node.spanish = spanish;
-            node.french = french;
         }
-
         return node;
     }
 
